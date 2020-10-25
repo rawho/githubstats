@@ -1,1 +1,1 @@
-web: gunicorn github_Developer_stats.wsgi
+web: gunicorn github_Developer_stats.wsgi --log
