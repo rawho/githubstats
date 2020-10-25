@@ -3,7 +3,7 @@
 
 {% block ogtags %}
     <meta property="og:site_name" content="GithubStats">
-    <meta property="og:title" content="Github Developer Stats" />
+    <meta property="og:title" content="{% if name != None %}{{ name }}{% else %} @{{username}} {% endif %} - GithubStats" />
     <meta property="og:url" content="https://githubstats.xyz" />
     <meta property="og:image" itemprop="image" content="{{dp_url}}" />
     <meta property="og:type" content="website" />
@@ -50,7 +50,7 @@
         <h1>Top repos</h1>
     </div>
     <div class="repo-container" id="repo-cont">
-        {% for repo in repos_list_short %}
+        {% for repo in repos_list %}
         <div class="repo less" id="1">
             <a id="link" href="{{repo.html_url}}">
                 <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; {{repo.name}} </h1>
@@ -73,25 +73,9 @@
             
         </div>
         {% endfor %}
-        {% for repo in repos_list %}
-        <div class="repo more hidden" id="1">
-            <a id="link" href="{{repo.html_url}}">
-                <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; {{repo.name}} 
-            </a>    
-                <div class="favorite" ><em class="fav fa fa-bookmark-o"></em> </div></h1>
-            
-            <p id="repo_desc_1">{{repo.description}}</p>
-            <div style="font-size: 15px;" class="stats">
-                <em class="fa fa-circle"></em> <span id="lang1">{{repo.language}}</span> &nbsp;&nbsp;
-                <em class="fa fa-star-o"></em> <span id="stars1">{{repo.stargazers_count}}</span> &nbsp;&nbsp;
-                <em class="fa fa-code-fork"></em> <span id="fork1">{{repo.forks_count}}</span> 
-            </div>
-        </div>
-        {% endfor %}
+        
     </div>
-    <center>
-        <button class="btn" id="show-more">More Repos</button>
-    </center>
+
 
 {% endblock %}
 

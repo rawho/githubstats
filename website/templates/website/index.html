@@ -53,7 +53,7 @@
             <div class="search-container">
                 <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
-                    <input name="username" class="search-input-main" type="text" id="username" placeholder="Github Username">
+                    <input name="username" class="search-input-main" type="text" id="username" placeholder="Github Username" required>
                     <button class="search-icon" href="{% url 'search' %}" id="get-stats"  name=""><em class="fa fa-search"></em></button>
                 </form>
             

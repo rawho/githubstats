@@ -31,7 +31,8 @@
         <div class="header">
             <div class="logo">
                 <a href="{% url 'index' %}"><img src="{% static '' %}img/logo.png" alt=""></a>
-                <h1>Github-Stats</h1>
+                <h1>Github-Stats </h1>
+                
             </div>
             <div class="search">
                 <form action="{% url 'search' %}" method="GET">
@@ -39,6 +40,7 @@
                     <input name="username" class="search-input" type="text" id="username" placeholder="Username">
                     <button href="{% url 'search' %}" id="get-stats" name="get Stats"><em class="fa fa-search"></em></button>
                 </form>
+               
             </div>
         </div>
         <div class="sidebar sticky">
@@ -70,9 +72,16 @@
                             <em class="fa fa-code-fork"></em> <span>{{bookmark.forks}}</span> 
                         </div>
                     </div>
+                {% empty %}
+                <div style="grid-column: 1/3; height: 60vh; justify-content: center;" class="no-bookmark">
+
+                    <h1 style="text-align: center; color: tomato;">No Bookmarks found</h1>
+                    <a href="{% url 'index' %}"><h1 style="text-align: center; color: #ffc107;">Home</h1></a>
+                </div>
+
                 {% endfor %}
             </div>
-            <div class="footer">
+            <div style="margin-top: 0px;" class="footer">
                 <p>Copyright ©2020 All rights reserved</p> 
                 <p>Website designed and developed by <a href="https://github.com/rawho">Rahul T</a></p>
 

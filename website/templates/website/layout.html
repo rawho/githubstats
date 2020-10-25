@@ -31,14 +31,15 @@
         <div class="header">
             <div class="logo">
                 <a href="{% url 'index' %}"><img src="{% static '' %}img/logo.png" alt=""></a>
-                <h1>Github-Stats</h1>
+                <h1>Github-Stats  <span style="margin-left: 10px; font-size: 18px; text-align: center;"> <a style="text-decoration: none; color: #ffc107;" href="{% url 'bookmark_detail' %}"><em style="color:#ffc107;" class="fa fa-bookmark-o"></em>Bookmarks</a> </span></h1>
             </div>
             <div class="search">
                 <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
-                    <input name="username" class="search-input" type="text" id="username" placeholder="Username">
+                    <input name="username" class="search-input" type="text" id="username" placeholder="Username" required>
                     <button href="{% url 'search' %}" id="get-stats" name="get Stats"><em class="fa fa-search"></em></button>
                 </form>
+                
             </div>
         </div>
         <div class="sidebar sticky">

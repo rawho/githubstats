@@ -48,15 +48,7 @@ class Bookmark(object):
             del self.bookmark[repo_id]
             self.save()
 
-    def check(self,repos):
-        """
-        Check whether the repo is in bookmarks
-        """
-        if repo_id in self.bookmark:
-            return True
-        else:
-            return False
-
+    
     def __iter__(self):
         repo_ids = self.bookmark.keys()
         repos_list = []
