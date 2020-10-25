@@ -27,7 +27,9 @@ class Bookmark(object):
                                         'id' : repo_id,  
                                         'url' : repo["html_url"],
                                         'likes' : repo["stargazers_count"],
-                                        'description' : repo["description"]
+                                        'description' : repo["description"],
+                                        'language': repo["language"],
+                                        'forks': repo["forks_count"]
                                     }
         self.save()
     
@@ -62,7 +64,7 @@ class Bookmark(object):
             res = requests.get(f"https://api.github.com/repositories/{repo_id}")
             repo_details = res.json()
             repos_list.append(repo_details)
-            self.bookmark[str(i["id"])]['name'] = name 
+
         
         for item in self.bookmark.values():
             yield item
