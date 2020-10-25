@@ -1,12 +1,77 @@
-{% extends 'website/layout.html' %}
+{% load static %}
 
-{% block sidebar%}
-    
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Stats</title>
 
 
-{% block main %}
-    <h1 class="limit">Hello  {{username}}</h1>
-    <p class="limit">Try With a different username</p>
-    <em class="limit fa fa-frown-o"></em>
-{% endblock %}
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static '' %}css/index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
+    <!-- favicon  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '' %}favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '' %}favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '' %}favicon/favicon-16x16.png">
+    <link rel="manifest" href="{% static '' %}favicon/site.webmanifest">
+
+    <!-- SEO -->
+    <meta property="og:site_name" content="GithubStats">
+    <meta property="og:title" content="Github Developer Stats" />
+    <meta property="og:url" content="https://githubstats.xyz" />
+    <meta property="og:image" itemprop="image" content="http://rawho.s3.amazonaws.com/og-githubstats.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Github status of all developers in the world at your fingertips - Designed and Developed by Rahul T" />
+    <meta name="keywords" content="githubstats, github, github status, github developers, github developer status, github stats card">
+    <meta name="description" content="Github status of all developers in the world at your fingertips - Designed and Developed by Rahul T">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="sidebar sticky">
+            <div class="logo">
+                <img src="{% static 'img/og-githubstats.png' %}" alt="">
+                <h1>Gihtub Developer Stats</h1>
+                <p>Details of all the developers in the world at your fingertips, With a simple search</p>
+
+                <!-- Place this tag where you want the button to render. -->
+                <center>
+                    <a class="github-button" href="https://github.com/rawho/github-stats" data-color-scheme="no-preference: light; light: light; dark: light;" data-size="large" data-show-count="true" aria-label="Star rawho/github-stats on GitHub">Star</a>
+                </center>
+
+                <a style="text-decoration: none;" href="#search"><em id="arrow-down" class="fa fa-arrow-down fa-2x"></em></a>
+            </div>
+            
+        </div>
+        <div class="main" id="search">
+            <div class="search-container">
+                <form action="{% url 'search' %}" method="GET">
+                    {% csrf_token %}
+                    <input name="username" class="search-input-main" type="text" id="username" placeholder="Github Username">
+                    <button class="search-icon" href="{% url 'search' %}" id="get-stats"  name=""><em class="fa fa-search"></em></button>
+                </form>
+            
+            </div>
+            <div class="footer">
+                <p>Copyright ©2020 All rights reserved</p> 
+                <p>Website designed and developed by <a href="https://github.com/rawho">Rahul T</a></p>
+
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script src="{% static '' %}js/main.js"></script>
+    <script src="{% static '' %}https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
+

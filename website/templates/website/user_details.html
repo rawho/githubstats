@@ -1,10 +1,22 @@
 {% extends 'website/layout.html' %}
 {% load static %}
 
+{% block ogtags %}
+    <meta property="og:site_name" content="GithubStats">
+    <meta property="og:title" content="Github Developer Stats" />
+    <meta property="og:url" content="https://githubstats.xyz" />
+    <meta property="og:image" itemprop="image" content="{{dp_url}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{{bio}}" />
+    <meta name="keywords" content="{{name}}, {{username}} githubstats, github, github status, github developers, github developer status, github stats card">
+    <meta name="description" content="Github status of all developers in the world at your fingertips - Designed and Developed by Rahul T">
+
+{% endblock %}
+
 {% block sidebar %}
     <div class="dp">
         <img src="{{dp_url}}" alt="" id="dp">
-        <h2 id="name">{{ name }}(@{{username}})</h2>
+        <h2 id="name">{% if name != None %}{{ name }}(@{{username}}) {% else %} @{{username}} {% endif %}</h2>
         <p id="bio">{{bio}}</p>
     </div>
     <div class="social-links">

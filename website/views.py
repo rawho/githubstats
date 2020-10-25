@@ -79,7 +79,7 @@ def user_details(request, username):
     
 
 def search(request):
-    username = request.POST.get("username")
+    username = request.GET.get("username")
     return HttpResponseRedirect(reverse('user_details', args=(username,)))
 
 

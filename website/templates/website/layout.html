@@ -21,14 +21,9 @@
     <link rel="manifest" href="{% static '' %}favicon/site.webmanifest">
 
     <!-- SEO -->
-    <meta property="og:site_name" content="GithubStats">
-    <meta property="og:title" content="Github Developer Stats" />
-    <meta property="og:url" content="https://githubstats.xyz" />
-    <meta property="og:image" itemprop="image" content="http://rawho.s3.amazonaws.com/og-githubstats.png" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="Github status of all developers in the world at your fingertips - Designed and Developed by Rahul T" />
-    <meta name="keywords" content="githubstats, github, github status, github developers, github developer status, github stats card">
-    <meta name="description" content="Github status of all developers in the world at your fingertips - Designed and Developed by Rahul T">
+    {% block ogtags %}
+    {% endblock %}
+    
 </head>
 <body>
 
@@ -39,7 +34,7 @@
                 <h1>Github-Stats</h1>
             </div>
             <div class="search">
-                <form action="{% url 'search' %}" method="POST">
+                <form action="{% url 'search' %}" method="GET">
                     {% csrf_token %}
                     <input name="username" class="search-input" type="text" id="username" placeholder="Username">
                     <button href="{% url 'search' %}" id="get-stats" name="get Stats"><em class="fa fa-search"></em></button>
