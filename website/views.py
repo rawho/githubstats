@@ -24,7 +24,7 @@ def user_details(request, username):
             if repo["fork"] == False:
                 repos_list.append(repo)
         repos_list_short = sorted(repos_list, key=lambda  i: i['stargazers_count'], reverse=True)[:4]
-
+        repos_list = sorted(repos_list, key=lambda  i: i['stargazers_count'], reverse=True)
 
         dp_url = profile_data["avatar_url"]
         name = profile_data["name"]
