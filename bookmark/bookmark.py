@@ -27,9 +27,7 @@ class Bookmark(object):
                                         'id' : repo_id,  
                                         'url' : repo["html_url"],
                                         'likes' : repo["stargazers_count"],
-                                        'description' : repo["description"],
-                                        'language' : repo["language"],
-                                        'forks' : repo["forks_count"]
+                                        'description' : repo["description"]
                                     }
         self.save()
     
@@ -48,3 +46,34 @@ class Bookmark(object):
             del self.bookmark[repo_id]
             self.save()
 
+    def check(self,repos):
+        """
+        Check whether the repo is in bookmarks
+        """
+        if repo_id in self.bookmark:
+            return True
+        else:
+            return False
+
+    def __iter__(self):
+        repo_ids = self.bookmark.keys()
+        repos_list = []
+        for repo_id in repo_ids:
+            res = requests.get(f"https://api.github.com/repositories/{repo_id}")
+            repo_details = res.json()
+            repos_list.append(repo_details)
+            self.bookmark[str(i["id"])]['name'] = name 
+        
+        for item in self.bookmark.values():
+            yield item
+
+    def __len__(self):
+        """
+        count all repos in bookmark
+        """
+        return len(self.bookmark.values())
+    
+    def clear(self):
+        # remove from bookmark
+        del self.session[settings.BOOKMARK_SESSION_ID]
+        self.session.modified = True
