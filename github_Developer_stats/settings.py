@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!_-tjpfdvkx^pvomg5r=d4$n4x_e@!1rcuw83jg5%kfe$4b*lf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["github-developer-stats.herokuapp.com", "localhost", '127.0.0.1']
 
@@ -32,6 +32,7 @@ BOOKMARK_SESSION_ID = 'bookmark'
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
