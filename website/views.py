@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
-
+from bookmark.bookmark import Bookmark
 # Create your views here.
 import requests
 
@@ -48,6 +48,10 @@ def user_details(request, username):
         public_repos_count = len(repos_list)
         public_gists_count = profile_data["public_gists"]
 
+
+
+        
+        
         return render(request, 'website/user_details.html', {
         'dp_url': dp_url,
         'name': name,

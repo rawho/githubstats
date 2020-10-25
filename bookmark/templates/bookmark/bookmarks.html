@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Stats</title>
+
+
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="{% static '' %}css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+
+    <!-- favicon  -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '' %}favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '' %}favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '' %}favicon/favicon-16x16.png">
+    <link rel="manifest" href="{% static '' %}favicon/site.webmanifest">
+
+    <!-- SEO -->
+    {% block ogtags %}
+    {% endblock %}
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{% static '' %}img/logo.png" alt=""></a>
+                <h1>Github-Stats</h1>
+            </div>
+            <div class="search">
+                <form action="{% url 'search' %}" method="GET">
+                    {% csrf_token %}
+                    <input name="username" class="search-input" type="text" id="username" placeholder="Username">
+                    <button href="{% url 'search' %}" id="get-stats" name="get Stats"><em class="fa fa-search"></em></button>
+                </form>
+            </div>
+        </div>
+        <div class="sidebar sticky">
+            {% block sidebar%}
+
+            {% endblock %}
+            
+        </div>
+        <div class="main">
+            <div class="heading">
+                <h1>Your Bookmarks</h1>
+            </div>
+            <div class="repo-container">
+                {% for bookmark in bookmarks %}
+                    <div class="repo">
+                        <a id="link" href="{{bookmark.url}}">
+                            <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; {{bookmark.name}} 
+                        </a>    
+                            <form action="{% url 'bookmark_remove' bookmark.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="favorite"><em class="trash fa fa-trash"></em></button>
+                            
+                            </form>
+                        
+                        <p>{{bookmark.description}}</p>
+                        <div style="font-size: 15px;" class="stats">
+                            <em class="fa fa-circle"></em> <span>{{bookmark.language}}</span> &nbsp;&nbsp;
+                            <em class="fa fa-star-o"></em> <span>{{bookmark.likes}}</span> &nbsp;&nbsp;
+                            <em class="fa fa-code-fork"></em> <span>{{bookmark.forks}}</span> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="footer">
+                <p>Copyright ©2020 All rights reserved</p> 
+                <p>Website designed and developed by <a href="https://github.com/rawho">Rahul T</a></p>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+    {% block scripts %}
+    {% endblock %}
+    <script src="{% static '' %}js/main.js"></script>
+<script src="{% static '' %}https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+</body>
+</html>
+

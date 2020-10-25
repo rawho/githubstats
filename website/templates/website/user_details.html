@@ -53,16 +53,24 @@
         {% for repo in repos_list_short %}
         <div class="repo less" id="1">
             <a id="link" href="{{repo.html_url}}">
-                <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; {{repo.name}} 
+                <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; {{repo.name}} </h1>
             </a>    
-                <div class="favorite" ><em class="fav fa fa-bookmark-o"></em> </div></h1>
-            
+                <form action="{% url 'bookmark_add' repo.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="favorite"><em class=" 
+                       bookmark
+                        fa fa-bookmark-o"></em></button>
+                
+                </form>
+                
+                
             <p id="repo_desc_1">{{repo.description}}</p>
-            <div class="stats">
+            <div style="font-size: 15px;" class="stats">
                 <em class="fa fa-circle"></em> <span id="lang1">{{repo.language}}</span> &nbsp;&nbsp;
                 <em class="fa fa-star-o"></em> <span id="stars1">{{repo.stargazers_count}}</span> &nbsp;&nbsp;
                 <em class="fa fa-code-fork"></em> <span id="fork1">{{repo.forks_count}}</span> 
             </div>
+            
         </div>
         {% endfor %}
         {% for repo in repos_list %}
@@ -73,7 +81,7 @@
                 <div class="favorite" ><em class="fav fa fa-bookmark-o"></em> </div></h1>
             
             <p id="repo_desc_1">{{repo.description}}</p>
-            <div class="stats">
+            <div style="font-size: 15px;" class="stats">
                 <em class="fa fa-circle"></em> <span id="lang1">{{repo.language}}</span> &nbsp;&nbsp;
                 <em class="fa fa-star-o"></em> <span id="stars1">{{repo.stargazers_count}}</span> &nbsp;&nbsp;
                 <em class="fa fa-code-fork"></em> <span id="fork1">{{repo.forks_count}}</span> 
@@ -89,134 +97,5 @@
 
 
 {% block scripts %}
-    <script>
-        async function getData() {
-        let username = document.getElementById("username").value
 
-        
-        let res = await fetch(`https://api.github.com/users/{{username}}`)
-        let json = await res.json()
-        
-        if (res.status === 200 ){
-
-            let res1 = await fetch(`https://api.github.com/users/{{username}}/repos`)
-            let repos = await res1.json()
-            
-
-            let repos_list = []
-            repos.forEach(repo => {
-                if (repo.fork == false) {
-                    repos_list.push(repo)
-                }
-            })
-            repos_list.sort(compare)
-            let repos_list_short = repos_list.slice(0, 4)
-
-            showless(repos_list_short)
-
-            document.getElementById("show-more").addEventListener("click", a => {
-                if(a.target.innerText == "More Repos"){
-                    showmore(repos_list)
-                    a.target.innerText = "Less Repos"
-                   
-                    
-                }
-                else if(a.target.innerText == "Less Repos"){
-                    showless(repos_list_short)
-                    a.target.innerText = "More Repos"
-                    
-                }
-            })
-
-            
-
-        }
-        else if(res.status === 404){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops!',
-                text: 'No such User Found',
-                confirmButtonColor: '#ffc107'
-                
-            })
-        }
-        
-        
-        
-        
-    }
-
-    document.getElementById("get-stats").addEventListener("click", async e => {
-        getData().catch(err => {
-            console.log(err)
-        })
-        let data = await getData()
-        document.getElementById("show-more").innerText = "More Repos"
-    })
-
-    function compare(a, b) {
-        const likeA = a.stargazers_count
-        const likeB = b.stargazers_count
-    
-        let comparison = 0;
-        if (likeA > likeB) {
-        comparison = -1;
-        } else if (likeA < likeB) {
-        comparison = 1;
-        }
-        return comparison;
-    }
-
-    function showless(repos_list_short){
-        let repoContainer = document.getElementById("repo-cont")
-            repoContainer.innerHTML = ''
-            for( let i=0; i<repos_list_short.length; i++){
-
-                repoContainer.innerHTML += `
-                
-                    <div class="repo" id="1">
-                        <a id="link" href="${repos_list_short[i].html_url}">
-                            <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; ${repos_list_short[i].name} 
-                        </a>    
-                            <div class="favorite" ><em class="fav fa fa-bookmark-o"></em> </div></h1>
-                        
-                        <p id="repo_desc_1">${repos_list_short[i].description}</p>
-                        <div class="stats">
-                            <em class="fa fa-circle"></em> <span id="lang1">${repos_list_short[i].language}</span> &nbsp;&nbsp;
-                            <em class="fa fa-star-o"></em> <span id="stars1">${repos_list_short[i].stargazers_count}</span> &nbsp;&nbsp;
-                            <em class="fa fa-code-fork"></em> <span id="fork1">${repos_list_short[i].forks_count}</span> 
-                        </div>
-                    </div>
-                
-                `
-            }
-    }
-
-    function showmore(repos_list){
-        let repoContainer = document.getElementById("repo-cont")
-        repoContainer.innerHTML = ''
-        for( let i=0; i<repos_list.length; i++){
-
-            repoContainer.innerHTML += `
-            <div class="repo" id="1">
-                <a id="link" href="${repos_list[i].html_url}">
-                    <h1 id="repo_title_1"><em class="fa fa-file-code-o"></em>&nbsp; ${repos_list[i].name} 
-                </a>    
-                    <div class="favorite" ><em class="fav fa fa-bookmark-o"></em> </div></h1>
-                
-                <p id="repo_desc_1">${repos_list[i].description}</p>
-                <div class="stats">
-                    <em class="fa fa-circle"></em> <span id="lang1">${repos_list[i].language}</span> &nbsp;&nbsp;
-                    <em class="fa fa-star-o"></em> <span id="stars1">${repos_list[i].stargazers_count}</span> &nbsp;&nbsp;
-                    <em class="fa fa-code-fork"></em> <span id="fork1">${repos_list[i].forks_count}</span> 
-                </div>
-            </div>
-            `
-        }
-    }
-
-
-
-    getData()
-    </script>
 {% endblock %}

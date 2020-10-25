@@ -235,10 +235,24 @@ body{
 .favorite{
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 10px;
     cursor: pointer;
+    border: none;
+    background: transparent;
 }
-
+.trash{
+    font-size: 22px!important;
+    color: rgb(243, 150, 134);
+}
+.bookmark{
+    font-size: 22px!important;
+    color: rgb(122, 159, 238);
+}
+.bookmarked{
+    font-size: 22px!important;
+    color: rgb(102, 235, 13);
+    background-color: #13b35b;
+}
 .main .repo-container .repo p{
     color: rgba(250,250,250, .5);
     font-size: 14px;
