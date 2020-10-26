@@ -19,7 +19,7 @@ body{
 
 .container{
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 2fr;
 }
 
 /*  Header  */
@@ -87,7 +87,7 @@ body{
 }
 
 .container .sidebar{
-    max-height: 90vh;
+    max-height: 100vh;
     position: sticky;
     top: 10px;
 }
@@ -95,7 +95,7 @@ body{
 .sidebar .dp{
     margin: auto;
     width: 80%;
-    margin-top: 30px;
+    margin-top: 0px;
 }
 .sidebar .dp img{
     width: 100%;

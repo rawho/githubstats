@@ -16,12 +16,12 @@
 {% block sidebar %}
     <div class="dp">
         <img src="{{dp_url}}" alt="" id="dp">
-        <h2 id="name">{% if name != None %}{{ name }}(@{{username}}) {% else %} @{{username}} {% endif %}</h2>
+        <h2 id="name">{% if name != None %}{{ name }} {% else %} @{{username}} {% endif %}</h2>
         <p id="bio">{{bio}}</p>
     </div>
     <div class="social-links">
-        <p><a id="github_link" href="{{github_link}}"><em class="fa fa-github"></em> <span id="github_username">rawho</span></a></p>
-        <p><a id="website_link" href="{{website_url}}"><em class="fa fa-link"></em> website</a></p>
+        <p><a id="github_link" href="{{github_link}}"><em class="fa fa-github"></em> <span id="github_username">{{username}}</span></a></p>
+        <p style="font-size: 15px;"><a id="website_link" href="{{website_url}}"><em class="fa fa-link"></em> {{website_url}}</a></p>
         <p> <em class="fa fa-map-marker"></em> <span id="location">{{location}}</span></p>
     </div>
 {% endblock %}
