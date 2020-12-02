@@ -26,5 +26,6 @@ Bookmark other users repos for later reference
 - [ ] Add a chart for the contributions of the user
 
 
-<h2 style="font-size:30px"> Contributions are Welcome </h2>
-<img style="width: 300px" src="static/img/coding.gif">
+# Support
+
+You can support me [here](https://rahulmanoj.xyz/support)
